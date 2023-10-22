@@ -62,7 +62,7 @@ class RegistrationPage:
     def current_address(self, value):
         browser.element('#currentAddress').type(value)
 
-    def choose_state(self, value):
+    def choose_country(self, value):
         browser.element('#react-select-3-input').should(be.visible).type(value).press_enter()
 
     def choose_city(self, value):
@@ -71,8 +71,8 @@ class RegistrationPage:
     def submit_form(self):
         browser.element('#submit').execute_script('element.click()')
 
-    def should_regustration_user(self, full_name, email, gender, phone_number, date_of_birth, subject, hobby, picture,
-                                 state, city):
+    def user_must_be_registered(self, full_name, email, gender, phone_number, date_of_birth, subject, hobby, picture,
+                                country, city):
         browser.all(".table-dark>tbody>tr>td:nth-child(2)").should(have.texts(
             full_name,
             email,
@@ -82,7 +82,7 @@ class RegistrationPage:
             subject,
             hobby,
             picture,
-            state,
+            country,
             city
         ))
         browser.element("#closeLargeModal").should(be.visible).click()

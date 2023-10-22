@@ -18,7 +18,7 @@ def test_demoqa():
     registration_page.choose_hobby_3('Music')
     registration_page.scroll_into_view()
     registration_page.download_picture('test.jpg')
-    registration_page.current_adress('Saint-Petersburg')
+    registration_page.current_address('Saint-Petersburg')
     registration_page.choose_state('NCR')
     registration_page.choose_city('Delhi')
     registration_page.submit_form()

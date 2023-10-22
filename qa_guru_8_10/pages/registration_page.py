@@ -59,7 +59,7 @@ class RegistrationPage:
         browser.element('#uploadPicture').should(be.visible).type(resources.path(value))
         return self
 
-    def current_adress(self, value):
+    def current_address(self, value):
         browser.element('#currentAddress').type(value)
 
     def choose_state(self, value):

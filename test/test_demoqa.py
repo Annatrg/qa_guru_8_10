@@ -1,38 +1,28 @@
-from selene import browser, command, be, have
-import os
+from qa_guru_8_10.pages.registration_page import RegistrationPage
 
 
 def test_demoqa():
-    browser.open('/')
-    # Имя, фамилия, электронная почта, пол и номер телефона
-    browser.element('#firstName').type('Anna')
-    browser.element('#lastName').type('Torgova')
-    browser.element('#userEmail').type('test_anna@mail.ru')
-    browser.element('[for="gender-radio-2"]').click()
-    browser.element('#userNumber').type('79990001122')
-    # Дата рождения
-    browser.element('#dateOfBirthInput').click()
-    browser.element('.react-datepicker__month-select').click().element('option[value="10"]').click()
-    browser.element('.react-datepicker__year-select').click().element('option[value="1996"]').click()
-    browser.element('.react-datepicker__day--026').click()
-    # Предмет и хобби
-    browser.element("#subjectsInput").type("Arts").press_enter()
-    browser.element('[for="hobbies-checkbox-1"]').click()
-    browser.element('[for="hobbies-checkbox-2"]').click()
-    browser.element('[for="hobbies-checkbox-3"]').click()
-    # Картинка
-    browser.element('[id="stateCity-label"]').perform(command.js.scroll_into_view)
-    browser.element('#uploadPicture').send_keys(os.path.abspath('picture/test.jpg'))
-    # Адрес
-    browser.element('#currentAddress').type('Saint-Petersburg')
-    browser.element('#react-select-3-input').type('NCR').click().press_enter()
-    browser.element('#react-select-4-input').type('Delhi').click().press_enter()
-    # Создание анкеты
-    browser.element('#submit').click()
+    registration_page = RegistrationPage()
 
-    # Проверка данных
-    browser.element('.modal-content').should(be.visible)
-    browser.element('.table').all('td:nth-of-type(2)').should(have.texts(
+    registration_page.open()
+
+    registration_page.fill_first_name('Anna')
+    registration_page.fill_last_name('Torgova')
+    registration_page.fill_email('test_anna@mail.ru')
+    registration_page.choose_a_gender('Female')
+    registration_page.fill_number_pelephone('79990001122')
+    registration_page.coose_data_of_birth(month='10', year='1996', day='026')
+    registration_page.choose_subject('Arts')
+    registration_page.choose_hobby_1('Sports')
+    registration_page.choose_hobby_2('Reading')
+    registration_page.choose_hobby_3('Music')
+    registration_page.download_picture('test.jpg')
+    registration_page.current_adress('Saint-Petersburg')
+    registration_page.choose_state('NCR')
+    registration_page.choose_city('Delhi')
+    registration_page.submit_form()
+
+    registration_page.should_regustration_user(
         'Anna Torgova',
         'test_anna@mail.ru',
         'Female',
@@ -42,4 +32,4 @@ def test_demoqa():
         'Sports, Reading, Music',
         'test.jpg',
         'Saint-Petersburg',
-        'NCR Delhi'))
+        'NCR Delhi')

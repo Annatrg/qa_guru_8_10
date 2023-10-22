@@ -3,6 +3,7 @@ from qa_guru_8_10.data.user import User
 
 registration_page = RegistrationPage()
 
+
 def test_demoqa():
     user = User(first_name='Anna',
                 last_name='Torgova',

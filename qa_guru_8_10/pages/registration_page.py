@@ -5,7 +5,7 @@ from qa_guru_8_10 import resources
 
 class RegistrationPage:
     def open(self):
-        browser.open('/')
+        browser.open('automation-practice-form/')
 
     def register(self, user):
 
@@ -19,7 +19,7 @@ class RegistrationPage:
         browser.element('#dateOfBirthInput').should(be.visible).click()
         browser.element('.react-datepicker__month-select').type(user.month_of_birth)
         browser.element('.react-datepicker__year-select').type(user.year_of_birth)
-        browser.element(f'.react-datepicker__day--0{user.day_of_birth}:not(.react-datepicker__day--outside-month)').\
+        browser.element(f'.react-datepicker__day--0{user.day_of_birth}:not(.react-datepicker__day--outside-month)'). \
             click()
         # Предмет и хобби
         browser.element('#subjectsInput').should(be.visible).type(user.subject).press_enter()
@@ -52,4 +52,3 @@ class RegistrationPage:
             user.current_address,
             f'{user.country} {user.city}'
         ))
-        return self

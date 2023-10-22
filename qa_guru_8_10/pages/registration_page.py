@@ -1,11 +1,11 @@
 from qa_guru_8_10 import resources
 
-from selene import browser, have, be, by
+from selene import browser, have, be, command
 
 
 class RegistrationPage:
     def open(self):
-        browser.open("/automation-practice-form")
+        browser.open('/')
 
     def fill_first_name(self, value):
         browser.element("#firstName").type(value)
@@ -20,16 +20,22 @@ class RegistrationPage:
         gender = f'//label[@for="gender-radio-2" and text()="{gender}"]'
         browser.element(gender).click()
 
-    def fill_number_pelephone(self, value):
+    def fill_number_phone(self, value):
         browser.element("#userNumber").type(value)
 
-    def coose_data_of_birth(self, year, month, day):
+    def choose_date_of_birth(self, year, month, day):
         browser.element('#dateOfBirthInput').should(be.visible).click()
-        browser.element('.react-datepicker__month-select').should(be.visible).click()
-        browser.element(f'.react-datepicker__month-select > option:nth-child({month})').should(be.visible).click()
-        browser.element('.react-datepicker__year-select').should(be.visible).click()
-        browser.element(f'.react-datepicker__year-select > option:nth-child({year})').should(be.visible).click()
-        browser.element(f'.react-datepicker__day.react-datepicker__day--{day}').should(be.visible).click()
+        # browser.element('.react-datepicker__month-select').should(be.visible).click()
+        # browser.element(f'.react-datepicker__month-select > option:nth-child({month})').should(be.visible).click()
+        # browser.element('.react-datepicker__year-select').should(be.visible).click()
+        # browser.element(f'.react-datepicker__year-select > option:nth-child({year})').should(be.visible).click()
+        # browser.element(f'.react-datepicker__day.react-datepicker__day--{day}').should(be.visible).click()
+
+        browser.element('.react-datepicker__month-select').type(month)
+        browser.element('.react-datepicker__year-select').type(year)
+        browser.element(
+            f'.react-datepicker__day--0{day}:not(.react-datepicker__day--outside-month)'
+        ).click()
 
     def choose_subject(self, value):
         browser.element('#subjectsInput').type('Arts').press_enter()
@@ -46,8 +52,12 @@ class RegistrationPage:
         hobby = f'//label[@for="hobbies-checkbox-3" and text()="{hobby}"]'
         browser.element(hobby).should(be.clickable).click()
 
+    def scroll_into_view(self):
+        browser.element('[id="stateCity-label"]').perform(command.js.scroll_into_view)
+
     def download_picture(self, value):
-        browser.element('#uploadPicture').type(resources.path(value))
+        browser.element('#uploadPicture').should(be.visible).type(resources.path(value))
+        return self
 
     def current_adress(self, value):
         browser.element('#currentAddress').type(value)

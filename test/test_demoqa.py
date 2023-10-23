@@ -3,7 +3,7 @@ import os
 
 
 def test_demoqa():
-    browser.open('/')
+    browser.open('automation-practice-form/')
     # Имя, фамилия, электронная почта, пол и номер телефона
     browser.element('#firstName').type('Anna')
     browser.element('#lastName').type('Torgova')
@@ -28,7 +28,7 @@ def test_demoqa():
     browser.element('#react-select-3-input').type('NCR').click().press_enter()
     browser.element('#react-select-4-input').type('Delhi').click().press_enter()
     # Создание анкеты
-    browser.element('#submit').click()
+    browser.element('#submit').execute_script('element.click()')
 
     # Проверка данных
     browser.element('.modal-content').should(be.visible)

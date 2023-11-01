@@ -1,6 +1,11 @@
 from qa_guru_8_10.pages.registration_page import RegistrationPage
+import allure
+from allure_commons.types import Severity
 
 
+@allure.tag("web")
+@allure.severity(Severity.CRITICAL)
+@allure.feature("Регистрация пользователя")
 def test_demoqa():
     registration_page = RegistrationPage()
 

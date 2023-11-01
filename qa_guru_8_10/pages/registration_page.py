@@ -1,12 +1,15 @@
 from selene.support.shared import browser
 from selene import browser, command, have, be
 from qa_guru_8_10 import resources
+from allure import step
 
 
 class RegistrationPage:
+    @step('Открыть страницу сайта')
     def open(self):
         browser.open('automation-practice-form/')
 
+    @step('Зарегистрировать пользователя')
     def register(self, user):
 
         # Имя, фамилия, электронная почта, пол и номер телефона
@@ -39,6 +42,7 @@ class RegistrationPage:
         # Создание анкеты
         browser.element('#submit').execute_script('element.click()')
 
+    @step('Проверить, что пользовательские данные сохранены корректно')
     def user_must_be_registered(self, user):
         browser.all(".table-dark>tbody>tr>td:nth-child(2)").should(have.texts(
             f'{user.first_name} {user.last_name}',

@@ -1,5 +1,5 @@
-from qa_guru.pages.registration_page import RegistrationPage
-from qa_guru.data.user import User
+from qaguru.pages.registration_page import RegistrationPage
+from qaguru.data.user import User
 import allure
 from allure_commons.types import Severity
 

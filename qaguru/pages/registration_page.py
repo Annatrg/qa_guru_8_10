@@ -1,6 +1,6 @@
 from selene.support.shared import browser
 from selene import browser, command, have, be
-from qa_guru import resources
+from qaguru import resources
 from allure import step
 
 
